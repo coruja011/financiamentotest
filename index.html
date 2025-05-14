@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seu Financiamento</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    header {
+      background-color: #1c1d5c;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+    section {
+      padding: 2rem;
+      background-color: white;
+      margin: 1rem;
+      border-radius: 8px;
+    }
+    #banner {
+      background: linear-gradient(135deg, #1c1d5c, #7925c3);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+    }
+    input, textarea, select, button {
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #7925c3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1c1d5c;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SeuFinanciamento</h1>
+    <nav>
+      <a href="#credito">Crédito Pessoal</a>
+      <a href="#veiculos">Veículos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <section id="banner">
+    <h2>Simule o seu financiamento com facilidade</h2>
+    <p>Rápido, seguro e 100% online</p>
+  </section>
+
+  <section id="credito">
+    <h3>Crédito Pessoal</h3>
+    <p>Solicite crédito de forma simples e direta, com taxas personalizadas.</p>
+    <form id="formCredito">
+      <input type="number" placeholder="Valor desejado (R$)" required />
+      <input type="number" placeholder="Quantidade de parcelas" required />
+      <button type="submit">Simular</button>
+    </form>
+    <div id="resultadoCredito"></div>
+  </section>
+
+  <section id="veiculos">
+    <h3>Financiamento de Veículos</h3>
+    <p>Financie seu carro novo ou usado com condições especiais.</p>
+    <form id="formVeiculo">
+      <input type="number" placeholder="Valor do veículo (R$)" required />
+      <input type="number" placeholder="Entrada (R$)" required />
+      <input type="number" placeholder="Parcelas" required />
+      <button type="submit">Simular</button>
+    </form>
+    <div id="resultadoVeiculo"></div>
+  </section>
+
+  <section id="contato">
+    <h3>Fale com a gente</h3>
+    <form>
+      <input type="text" placeholder="Seu nome" required />
+      <input type="email" placeholder="Seu e-mail" required />
+      <textarea placeholder="Sua mensagem" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - SeuFinanciamento. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById('formCredito').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const valor = parseFloat(this[0].value);
+      const parcelas = parseInt(this[1].value);
+      const juros = 0.025;
+      const valorParcela = (valor * (1 + juros) ** parcelas) / parcelas;
+      document.getElementById('resultadoCredito').innerHTML = `<p>Parcela aproximada: R$ ${valorParcela.toFixed(2)}</p>`;
+    });
+
+    document.getElementById('formVeiculo').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const valor = parseFloat(this[0].value);
+      const entrada = parseFloat(this[1].value);
+      const parcelas = parseInt(this[2].value);
+      const valorFinanciado = valor - entrada;
+      const juros = 0.02;
+      const valorParcela = (valorFinanciado * (1 + juros) ** parcelas) / parcelas;
+      document.getElementById('resultadoVeiculo').innerHTML = `<p>Parcela aproximada: R$ ${valorParcela.toFixed(2)}</p>`;
+    });
+  </script>
+</body>
+</html>
